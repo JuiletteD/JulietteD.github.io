@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <title>Dynamique</title>
+    <link rel="stylesheet" type="text/css" href="../style.css">
+
+  </head>
+
+  <body>
+    <header>
+      <h1>Site sans nom</h1>
+    </header>
+
+    <nav>
+      <ul>
+        <li><a href="../CV/page1.html">Qui suis-je</a></li>
+        <li><a href="./page2.html">Page dynamique</a></li>
+        <li><a href="../index.html">Accueil</a></li>
+      </ul>
+
+     </nav>
+
+     <main>
+
+  <aside>
+    
+      </aside>
+
+      <article>
+        <h2>Javascript quelque part ici</h2>
+        <p></p>
+
+        <h3>Regardez la vidéo</h3>
+
+ <button type="button">Load video</button>
+
+
+
+
+<video controls width="250"></video>
+ <!-- <source src="../video/Coffee-.webm" type="video/webm"></video>-->
+
+ <div class="event-log">
+        <label>Event log:</label>
+        <textarea readonly class="event-log-contents"></textarea>
+    </div>
+
+
+<!--<div id="div1"></div>
+<canvas id="myCanvas" width="200" height="200" onclick="updateCanvas()"></canvas>-->
+	
+
+      </article>
+
+    </main>
+
+    <footer>
+      <p>©Copyright ... </p>
+    </footer>
+<SCRIPT LANGUAGE="Javascript"> 
+			var i=1; 
+			var j=1; 
+			var aCanvas;
+			function updateCanvas()
+			{
+				aCanvas=document.getElementById('myCanvas');
+up();
+			}
+
+			function up()
+			{
+			
+
+			laDiv2=document.getElementById('div1');
+ document.getElementById('div1').innerHTML = "Paragraph changed"+i; 
+			
+					i++;
+				
+				
+			}
+
+const loadVideo = document.querySelector('button');
+const video = document.querySelector('video');
+const eventLog = document.querySelector('.event-log-contents');
+let source = null;
+
+function handleEvent(event) {
+    eventLog.textContent = eventLog.textContent + `${event.type}\n`;
+}
+
+video.addEventListener('loadstart', handleEvent);
+video.addEventListener('progress', handleEvent);
+video.addEventListener('canplay', handleEvent);
+video.addEventListener('canplaythrough', handleEvent);
+
+loadVideo.addEventListener('click', () => {
+
+    if (source) {
+        document.location.reload();
+    } else {
+        loadVideo.textContent = "Reset example";
+        source = document.createElement('source');
+        source.setAttribute("src", "../video/Coffee-.webm");
+        source.setAttribute("type", "video/webm");
+
+        video.appendChild(source);
+    }
+});
+		</script>
+  </body>
+</html>
