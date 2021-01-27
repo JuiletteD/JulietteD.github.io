@@ -7,7 +7,7 @@ html, body {
 
 html {
   font-size: 10px;
-  background-color: #a9a9a9;
+  background-color: #666;
 }
 
 body {
@@ -57,7 +57,7 @@ nav, article, aside, footer {
 
 nav {
   height: 50px;
-  background-color: #ff80ff;
+    background: linear-gradient(#e7dac0, white);
   display: flex;
   margin-bottom: 10px;
 }
@@ -120,8 +120,8 @@ article {
 
 aside {
   flex: 1;
-  margin-left: 10px;
-  background-color: #ff80ff;
+  margin-right: 10px;
+  background-color: #e7dac0;
 }
 
 aside li {
