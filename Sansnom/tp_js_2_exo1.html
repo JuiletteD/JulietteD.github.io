@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <title>Dynamique</title>
+    <link rel="stylesheet" type="text/css" href="../style.css">
+
+  </head>
+
+  <body>
+    <header>
+      <h1>Site sans nom</h1>
+    </header>
+
+    <nav>
+      <ul>
+        <li><a href="../CV/page1.html">Qui suis-je</a></li>
+        <li><a href="./page2.html">Page dynamique</a></li>
+        <li><a href="../index.html">Accueil</a></li>
+      </ul>
+
+     </nav>
+
+     <main>
+
+  <aside>
+    
+      </aside>
+
+      <article>
+    
+       
+
+        <h2>Regardez la vidéo</h2>
+
+
+<canvas id="canvas" width="600" height="600"></canvas>
+  <span id="procent"></span>
+
+
+      </article>
+
+    </main>
+
+    <footer>
+      <p>©Copyright ... </p>
+    </footer>
+<SCRIPT LANGUAGE="Javascript">
+var i = 0;
+var interv = setInterval(decompt, 100);
+let canvas = document.getElementById("canvas");
+let context = canvas.getContext("2d");
+var carre = creerRect(0,0, context);
+
+
+function creerRect(x2,y2, context1) {
+  var obj = {
+  x: x2,
+  y:  y2,
+  width: 50,
+  height: 50,
+ 
+  clear: function() {
+    context1.clearRect(this.x, this.y, this.width,  this.height); 
+console.log(this.x+","+this.y);
+  //context1.clearRect(, this.y,50,  50); 
+  },
+  draw: function() {
+console.log(this.x+","+this.y);
+
+    context1.fillStyle = "#FF0000";
+    context1.fillRect(this.x,this.y,this.width,this.height);
+  },
+  update: function(x1,y1){
+   this.x = x1;
+   this.y = y1; 
+  },
+  rend: function(x1,y1){
+   this.clear();
+   this.update(x1,y1);
+   this.draw();
+ 
+  }
+ };
+  return obj;
+}
+
+
+function stopdecompt() {
+      clearInterval(interv);
+    }
+
+function decompt(){
+ 
+ if(i*10 === 600){
+   stopdecompt();
+  }
+  carre.rend(i*10,0);
+  i=i+1;
+//console.log(i);
+}
+
+
+
+</script>
+  </body>
+</html>

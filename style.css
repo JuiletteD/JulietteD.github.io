@@ -142,3 +142,6 @@ button{
     max-width: 200px;
 margin: 20px;
 }
+#canvas{
+ background-color: #e7dac0;
+}
