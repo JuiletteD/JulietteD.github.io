@@ -131,3 +131,14 @@ aside li {
 footer {
   margin-top: 10px;
 }
+#vid{
+display : flex;
+ flex-direction:  column;
+ justify-content: center;
+
+}
+button{
+ background-color: #e7dac0;
+    max-width: 200px;
+margin: 20px;
+}

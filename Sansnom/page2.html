@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <title>Dynamique</title>
+    <link rel="stylesheet" type="text/css" href="../style.css">
+
+  </head>
+
+  <body>
+    <header>
+      <h1>Site sans nom</h1>
+    </header>
+
+    <nav>
+      <ul>
+        <li><a href="../CV/page1.html">Qui suis-je</a></li>
+        <li><a href="./page2.html">Page dynamique</a></li>
+        <li><a href="../index.html">Accueil</a></li>
+      </ul>
+
+     </nav>
+
+     <main>
+
+  <aside>
+    
+      </aside>
+
+      <article>
+    
+       
+
+        <h2>Regardez la vidéo</h2>
+
+
+  <div id="vid">
+ <button type="button">Load video</button>
+</br>
+ <video controls width="250"></video>
+</div>
+
+<canvas id="canvas" width="200" height="200"></canvas>
+  <span id="procent"></span>
+
+
+      </article>
+
+    </main>
+
+    <footer>
+      <p>©Copyright ... </p>
+    </footer>
+<SCRIPT LANGUAGE="Javascript"> 
+
+  const loadVideo = document.querySelector('button');
+  const video = document.querySelector('video');
+ 
+    let canvas = document.getElementById("canvas");
+let context = canvas.getContext("2d");
+let centerX = canvas.width / 2;
+let centerY = canvas.height / 2;
+let radius = 70;
+    
+/* draw the circle */ /* begin the path */
+context.beginPath();/* move to the center of the circle */
+context.moveTo(centerX, centerY); /* draw arc from 0 to 2 * Math.PI which is equivalent to 360 deg */
+context.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);/* close the path */
+context.closePath();/* fill it with grey color */
+context.fillStyle = "#ddd";
+context.fill();/* give a border to the circle */
+var percent = 0;
+context.strokeStyle = "rgba(200, 208, 218, 0.66)";
+context.stroke();
+
+
+let source = null;
+video.addEventListener('timeupdate', onProgress,false);
+
+
+function onProgress(e){
+var currtime=(e.target.currentTime*100)/105.565;
+maj(currtime);
+  
+}
+
+loadVideo.addEventListener('click', () => {
+
+    if (source) {
+        document.location.reload();
+    } else {
+        loadVideo.textContent = "Reset video";
+        source = document.createElement('source');
+source.setAttribute("src", "https://upload.wikimedia.org/wikipedia/commons/c/c4/Coffee_percolator.webm");
+source.setAttribute("type", "video/webm");
+
+video.appendChild(source);
+}
+});
+
+
+function maj(time)
+{
+
+canva(time);
+}
+
+function canva (time) {
+var percent =Math.round(time);
+  let canvas = document.getElementById("canvas");
+  let context = canvas.getContext("2d");
+  let centerX = canvas.width / 2;
+  let centerY = canvas.height / 2;
+  let radius = 70;
+
+    
+  /* draw the grey circle */ 
+  context.beginPath();
+  context.moveTo(centerX, centerY); 
+  context.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
+  context.closePath();
+  context.fillStyle = "#ddd";
+  context.fill();
+  context.strokeStyle = "rgba(200, 208, 218, 0.66)";
+  context.stroke();
+  
+  /* draw the green circle based on percentage */
+  let startAngle = 1.5 * Math.PI;
+  let unitValue = (Math.PI - 0.5 * Math.PI) / 25;
+  if (percent >= 0 && percent <= 25) {
+     endAngle = startAngle + (percent * unitValue);
+  } else if (percent > 25 && percent <= 50) {
+     endAngle = startAngle + (percent * unitValue);
+  } else if (percent > 50 && percent <= 75) {
+     endAngle = startAngle + (percent * unitValue);
+  } else if (percent > 75 && percent <= 100) {
+   endAngle = startAngle + (percent * unitValue);
+  }
+    
+  context.beginPath();
+  context.moveTo(centerX, centerY);
+  context.closePath();
+
+  context.fillStyle = "#2cb191";
+  context.arc(centerX, centerY, radius, startAngle, endAngle, false);
+  context.fill();
+
+  context.font = "30px Verdana";
+  context.fillStyle = "black";
+  context.textAlign = "center";
+  context.fillText(percent + "%", (canvas.width/2), (canvas.height/2));
+}
+
+</script>
+  </body>
+</html>
