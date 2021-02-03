@@ -16,7 +16,8 @@
     <nav>
       <ul>
         <li><a href="../CV/page1.html">Qui suis-je</a></li>
-        <li><a href="./page2.html">Page dynamique</a></li>
+       <li><a href="./page2.html">Page de video</a></li> 
+        <li><a href="./Resource.html">Page de resource</a></li>
         <li><a href="../index.html">Accueil</a></li>
       </ul>
 
@@ -52,7 +53,8 @@ var interv = setInterval(decompt, 100);
 let canvas = document.getElementById("canvas");
 let context = canvas.getContext("2d");
 var carre = creerRect(0,0, context);
-
+var carre2 = creerRect(0,0, context);
+var carre3 = creerRect(0,0, context);
 
 function creerRect(x2,y2, context1) {
   var obj = {
@@ -60,7 +62,7 @@ function creerRect(x2,y2, context1) {
   y:  y2,
   width: 50,
   height: 50,
- 
+  fin: false,
   clear: function() {
     context1.clearRect(this.x, this.y, this.width,  this.height); 
 console.log(this.x+","+this.y);
@@ -73,8 +75,12 @@ console.log(this.x+","+this.y);
     context1.fillRect(this.x,this.y,this.width,this.height);
   },
   update: function(x1,y1){
-   this.x = x1;
-   this.y = y1; 
+   if(x1<=550){
+     this.x = x1;
+     this.y = y1;
+   }else{
+     this.fin=true;
+  } 
   },
   rend: function(x1,y1){
    this.clear();
@@ -93,12 +99,18 @@ function stopdecompt() {
 
 function decompt(){
  
- if(i*10 === 600){
+ if(carre.fin===true && carre2.fin===true && carre3.fin===true){
    stopdecompt();
   }
   carre.rend(i*10,0);
+  if(i*10 >= 100){
+    carre2.rend(i*10-100,60);
+  }
+  if(i*10 >= 400){
+    carre3.rend(i*10-400,120);
+  }
   i=i+1;
-//console.log(i);
+console.log(i);
 }
 
 

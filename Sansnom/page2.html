@@ -16,7 +16,8 @@
     <nav>
       <ul>
         <li><a href="../CV/page1.html">Qui suis-je</a></li>
-        <li><a href="./page2.html">Page dynamique</a></li>
+        <li><a href="./tp_js_2_exo1.html">Page de carre</a></li>
+        <li><a href="./Resource.html">Page de resource</a></li>
         <li><a href="../index.html">Accueil</a></li>
       </ul>
 
@@ -56,10 +57,10 @@
     </footer>
 <SCRIPT LANGUAGE="Javascript"> 
 
-  const loadVideo = document.querySelector('button');
-  const video = document.querySelector('video');
+const loadVideo = document.querySelector('button');
+const video = document.querySelector('video');
  
-    let canvas = document.getElementById("canvas");
+let canvas = document.getElementById("canvas");
 let context = canvas.getContext("2d");
 let centerX = canvas.width / 2;
 let centerY = canvas.height / 2;
@@ -98,7 +99,7 @@ source.setAttribute("src", "https://upload.wikimedia.org/wikipedia/commons/c/c4/
 source.setAttribute("type", "video/webm");
 
 video.appendChild(source);
-}
+    }
 });
 
 
@@ -154,6 +155,19 @@ var percent =Math.round(time);
   context.fillText(percent + "%", (canvas.width/2), (canvas.height/2));
 }
 
+
+
+
+
+
+function reqListener () {
+  console.log(this.responseText);
+}
+
+var oReq = new XMLHttpRequest();
+oReq.onload = reqListener;
+oReq.open("get", "yourFi", true);
+oReq.send();
 </script>
   </body>
 </html>

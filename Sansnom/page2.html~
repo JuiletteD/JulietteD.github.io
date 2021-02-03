@@ -29,28 +29,26 @@
       </aside>
 
       <article>
-        <h2>Javascript quelque part ici</h2>
-        <p></p>
+    
+       
 
-        <h3>Regardez la vidéo</h3>
+        <h2>Regardez la vidéo</h2>
 
+
+<<<<<<< HEAD
+  <div id="vid">
  <button type="button">Load video</button>
+</br>
+=======
+  <div>
+ <button type="button">Load video</button>
+>>>>>>> 371740107218744b6a26eb2d168e68bb5b2f6f57
+ <video controls width="250"></video>
+</div>
 
+<canvas id="canvas" width="200" height="200"></canvas>
+  <span id="procent"></span>
 
-
-
-<video controls width="250"></video>
- <!-- <source src="../video/Coffee-.webm" type="video/webm"></video>-->
-
- <div class="event-log">
-        <label>Event log:</label>
-        <textarea readonly class="event-log-contents"></textarea>
-    </div>
-
-
-<!--<div id="div1"></div>
-<canvas id="myCanvas" width="200" height="200" onclick="updateCanvas()"></canvas>-->
-	
 
       </article>
 
@@ -60,54 +58,105 @@
       <p>©Copyright ... </p>
     </footer>
 <SCRIPT LANGUAGE="Javascript"> 
-			var i=1; 
-			var j=1; 
-			var aCanvas;
-			function updateCanvas()
-			{
-				aCanvas=document.getElementById('myCanvas');
-up();
-			}
 
-			function up()
-			{
-			
+  const loadVideo = document.querySelector('button');
+  const video = document.querySelector('video');
+ 
+    let canvas = document.getElementById("canvas");
+let context = canvas.getContext("2d");
+let centerX = canvas.width / 2;
+let centerY = canvas.height / 2;
+let radius = 70;
+    
+/* draw the circle */ /* begin the path */
+context.beginPath();/* move to the center of the circle */
+context.moveTo(centerX, centerY); /* draw arc from 0 to 2 * Math.PI which is equivalent to 360 deg */
+context.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);/* close the path */
+context.closePath();/* fill it with grey color */
+context.fillStyle = "#ddd";
+context.fill();/* give a border to the circle */
+var percent = 0;
+context.strokeStyle = "rgba(200, 208, 218, 0.66)";
+context.stroke();
 
-			laDiv2=document.getElementById('div1');
- document.getElementById('div1').innerHTML = "Paragraph changed"+i; 
-			
-					i++;
-				
-				
-			}
 
-const loadVideo = document.querySelector('button');
-const video = document.querySelector('video');
-const eventLog = document.querySelector('.event-log-contents');
 let source = null;
+video.addEventListener('timeupdate', onProgress,false);
 
-function handleEvent(event) {
-    eventLog.textContent = eventLog.textContent + `${event.type}\n`;
+
+function onProgress(e){
+var currtime=(e.target.currentTime*100)/105.565;
+maj(currtime);
+  
 }
-
-video.addEventListener('loadstart', handleEvent);
-video.addEventListener('progress', handleEvent);
-video.addEventListener('canplay', handleEvent);
-video.addEventListener('canplaythrough', handleEvent);
 
 loadVideo.addEventListener('click', () => {
 
     if (source) {
         document.location.reload();
     } else {
-        loadVideo.textContent = "Reset example";
+        loadVideo.textContent = "Reset video";
         source = document.createElement('source');
-        source.setAttribute("src", "../video/Coffee-.webm");
-        source.setAttribute("type", "video/webm");
+source.setAttribute("src", "https://upload.wikimedia.org/wikipedia/commons/c/c4/Coffee_percolator.webm");
+source.setAttribute("type", "video/webm");
 
-        video.appendChild(source);
-    }
+video.appendChild(source);
+}
 });
-		</script>
+
+
+function maj(time)
+{
+
+canva(time);
+}
+
+function canva (time) {
+var percent =Math.round(time);
+  let canvas = document.getElementById("canvas");
+  let context = canvas.getContext("2d");
+  let centerX = canvas.width / 2;
+  let centerY = canvas.height / 2;
+  let radius = 70;
+
+    
+  /* draw the grey circle */ 
+  context.beginPath();
+  context.moveTo(centerX, centerY); 
+  context.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
+  context.closePath();
+  context.fillStyle = "#ddd";
+  context.fill();
+  context.strokeStyle = "rgba(200, 208, 218, 0.66)";
+  context.stroke();
+  
+  /* draw the green circle based on percentage */
+  let startAngle = 1.5 * Math.PI;
+  let unitValue = (Math.PI - 0.5 * Math.PI) / 25;
+  if (percent >= 0 && percent <= 25) {
+     endAngle = startAngle + (percent * unitValue);
+  } else if (percent > 25 && percent <= 50) {
+     endAngle = startAngle + (percent * unitValue);
+  } else if (percent > 50 && percent <= 75) {
+     endAngle = startAngle + (percent * unitValue);
+  } else if (percent > 75 && percent <= 100) {
+   endAngle = startAngle + (percent * unitValue);
+  }
+    
+  context.beginPath();
+  context.moveTo(centerX, centerY);
+  context.closePath();
+
+  context.fillStyle = "#2cb191";
+  context.arc(centerX, centerY, radius, startAngle, endAngle, false);
+  context.fill();
+
+  context.font = "30px Verdana";
+  context.fillStyle = "black";
+  context.textAlign = "center";
+  context.fillText(percent + "%", (canvas.width/2), (canvas.height/2));
+}
+
+</script>
   </body>
 </html>
