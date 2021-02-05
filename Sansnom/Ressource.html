@@ -34,7 +34,7 @@
       <aside>   
       </aside>
       <article>
-        <h2>Aller chercher la resource</h2>
+        <h2>Allez chercher la resource</h2>
 
 <h3>Fetch / async</h3>
  
@@ -69,9 +69,9 @@ let context = canvas.getContext("2d");
 let radius = 25;
 context.clearRect(0,0, canvas.width,  canvas.height); 
   context.beginPath();
-context.arc(x, y, radius, 0, 2 * Math.PI, false);/* close the path */
+context.arc(x%600, y%600, radius, 0, 2 * Math.PI, false);/* close the path */
 context.closePath(); /*fill it with grey color */
-context.fillStyle = "red";
+context.fillStyle = "#2cb191";
 context.fill();/* give a border to the circle */
 /*context.strokeStyle = "rgba(200, 208, 218, 0.66)";
 context.stroke();*/
