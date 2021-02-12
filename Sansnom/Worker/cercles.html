@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <title>Dynamique</title>
+    <link rel="stylesheet" type="text/css" href="../../style.css">
+
+  </head>
+
+  <body>
+    <header>
+      <h1>Site sans nom</h1>
+    </header>
+
+    <nav>
+     <ul>
+      <li><a href="../../index.html">Accueil</a></li>
+      <li><a href="../../CV/page1.html">Qui suis-je</a></li>
+    
+         <li class="dropdown">
+       <a href="javascript:void(0)" class="dropbtn">Dynamique</a>
+    <div class="dropdown-content">
+      <a href="../video.html">Caffe</a>
+      <a href="../carre.html">Carré</a>
+      <a class="active" href="../Ressource.html">Ressource</a>
+      <a href="./cercles.html">Cercles</a>
+    </div></li>
+        
+      </ul>
+     </nav>
+
+     <main>
+
+      <aside>   
+      </aside>
+      <article>
+        <h2></h2>
+
+
+ 
+
+ <canvas id="canvas" width="600" height="600"></canvas>
+
+
+
+      </article>
+    </main>
+
+    <footer>
+      <p>©Copyright ... </p>
+    </footer>
+<SCRIPT LANGUAGE="Javascript"> 
+var i = 0;
+const canvas = document.getElementById("canvas");
+const context = canvas.getContext("2d");
+const myWorker= [creerWorker(0,0,"red"),creerWorker(0,0,"grey"),creerWorker(0,0,"blue")
+,creerWorker(0,0,"green"),creerWorker(0,0,"Violet"),creerWorker(0,0,"orange")
+,creerWorker(0,0,"black"),creerWorker(0,0," Cyan"),creerWorker(0,0,"yellow"),creerWorker(0,0,"white")];
+myWorker.forEach(Setonmessage);
+
+function Setonmessage(value, index, array) {
+array[index].worker.onmessage = function(e) {
+		x=e.data[0];
+		y=e.data[1];
+		array[index].draw(x,y);
+     }
+}
+   
+var interv = setInterval(decompt, 1000);
+
+
+function decompt(){
+i=i+1;
+if (window.Worker) {
+
+myWorker.forEach(CleareWorker);
+
+function CleareWorker(value, index, array) {
+		array[index].cleare();
+}
+
+myWorker.forEach(PostMessage);
+
+function PostMessage(value, index, array) {
+	array[index].worker.postMessage('i want coordinates');
+}
+
+} else {
+	console.log('Your browser doesn\'t support web workers.');
+	clearInterval(interv);
+}
+
+}
+
+
+function creerWorker(x2,y2,colorC) {
+  var obj = {
+  worker: new Worker("./worker.js"),
+  x: x2,
+  y:  y2,
+  radius: 25,
+  color: colorC,
+  
+  cleare: function() {
+   /* let radius = 25;
+    context.beginPath();
+    context.arc(this.x, this.y, this.radius, 0, 2 * Math.PI, false);
+    context.closePath(); 
+    context.fillStyle = "#e7dac0";
+    context.fill();*/
+  //now, erase the arc by clearing a rectangle that's slightly larger than the arc
+  context.beginPath();
+  context.clearRect(this.x - this.radius - 1, this.y - this.radius - 1, this.radius * 2 + 2, this.radius * 2 + 2);
+  context.closePath();
+  },
+  
+  draw: function(x1,y1) {
+  this.x = x1;
+  this.y = y1;
+    let radius = 25;
+    context.beginPath();
+    context.arc(this.x, this.y, this.radius, 0, 2 * Math.PI, false);/* close the path */
+    context.closePath(); /*fill it with grey color */
+    context.fillStyle = this.color;
+    context.fill();
+  },
+  
+ };
+  return obj;
+}
+
+
+              
+
+</script>
+
+</body>
+</html>
